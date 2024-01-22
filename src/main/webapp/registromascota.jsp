@@ -8,14 +8,15 @@
 </head>
 <body>
 <h2>Login</h2>
-<form action="http://localhost:8080/BancoPlatinum/Login">
+<form action="http://localhost:8080/BancoPlatinum/RegistroMascota">
 <pre>
 
-<input type="text" name="nombreUsuario" placeholder="nombreUsuario">
+<input type="text" name="rutDueño" placeholder="rutDueño">
+<input type="text" name="tipoMascota" placeholder="tipoMascota">
+<input type="text" name="edad" placeholder="edad">
+<input type="text" name="nombreMascota" placeholder="nombreMascota">
 
-<input type="password" name="password" placeholder="password">
-
-<input type="submit" value="Login" name="login">
+<input type="submit" value="RegistroMascota" name="RegistroMascota">
 </pre>
 </form>
 </body>

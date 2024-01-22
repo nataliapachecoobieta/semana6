@@ -10,18 +10,19 @@ import javax.servlet.http.HttpSession;
 
 import bancoplatinum.beans.Persona;
 import bancoplatinum.beans.Usuario;
+import bancoplatinum.model.ModeloDuenio;
 import bancoplatinum.model.ModeloUsuario;
 
 /**
  * Servlet implementation class Login
  */
-public class Login extends HttpServlet {
+public class RegistroDuenio extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public RegistroDuenio() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,22 +33,30 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// registro duenio
 
-		String nombreUsuario = request.getParameter("nombreUsuario");
-		String password = request.getParameter("password");
+		String rut = request.getParameter("rut");
+		String nombre = request.getParameter("nombre");
+		String apellido = request.getParameter("apellido");
+		String direccion = request.getParameter("direccion");
+		String correo = request.getParameter("correo");
+		String telefono = request.getParameter("telefono");
+		String nombreMascota = request.getParameter("nombreMascota");
+		
+		// en pausa, creamos modelo Duenio
 		
 		try {
-			ModeloUsuario modeloUsuario = new ModeloUsuario();
-			boolean encontrado = modeloUsuario.read(nombreUsuario, password);
+			ModeloDuenio modelo = new ModeloDuenio();
+			modelo.insert(rut, nombre, apellido, direccion, correo, telefono, nombreMascota);
 			
-			if (encontrado) {
-				response.sendRedirect("http://localhost:8080/BancoPlatinum/home.jsp");
-			} else {
-				response.sendRedirect("http://localhost:8080/BancoPlatinum/error.jsp");
-			}
+			// ok
+			response.sendRedirect("http://localhost:8080/BancoPlatinum/home.jsp");
 			
 		} catch (Exception e) {
+			// err
 			e.printStackTrace();
+			response.sendRedirect("http://localhost:8080/BancoPlatinum/error.jsp");
 		}
 	}
 
@@ -62,5 +71,3 @@ public class Login extends HttpServlet {
 	}
 
 }
-
-

@@ -10,7 +10,7 @@ public class Database {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/bancoplatinum", "root", "admin");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/petsmile", "root", "admin");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

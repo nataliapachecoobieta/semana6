@@ -8,19 +8,5 @@
 </head>
 <body>
 
-<%
-String rut = (String) session.getAttribute("rut");
-String nombre = (String) session.getAttribute("nombre");
-String apellido = (String) session.getAttribute("apellido");
-String telefono = (String) session.getAttribute("telefono");
-String fechaIngreso = (String) session.getAttribute("fechaIngreso");
-%>
-
-<h3><%out.println(rut); %></h3>
-<h3><%out.println(nombre); %></h3>
-<h3><%out.println(apellido); %></h3>
-<h3><%out.println(telefono); %></h3>
-<h3><%out.println(fechaIngreso); %></h3>
-
 </body>
 </html>

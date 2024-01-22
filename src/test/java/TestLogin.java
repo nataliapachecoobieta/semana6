@@ -2,31 +2,30 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import bancoplatinum.beans.Persona;
-import bancoplatinum.beans.Usuario;
-import bancoplatinum.model.ModeloPersona;
 import bancoplatinum.model.ModeloUsuario;
 
+// crear una clase normal
 public class TestLogin {
 
 	@Test
-	public void test1() {
+	public void testLoginOk() {
+		// datos creados anteriormente con sql 
+		String nombreUsuario = "test";
+		String password = "test";
+		
 		ModeloUsuario modeloUsuario = new ModeloUsuario();
-		Usuario usuario = modeloUsuario.read("1", "1");
-		assertNotEquals(usuario, null);
+		boolean encontrado = modeloUsuario.read(nombreUsuario, password);
+		assertTrue(encontrado); // checkeamos que ha sido encontrado, caso contrario debe arrojar un error
 	}
 	
 	@Test
-	public void test2() {
+	public void testLoginErr() {
+		// datos creados anteriormente con sql 
+		String nombreUsuario = "noexiste";
+		String password = "noexiste";
+		
 		ModeloUsuario modeloUsuario = new ModeloUsuario();
-		Usuario usuario = modeloUsuario.read("1", "2");
-		assertEquals(usuario, null);
-	}
-	
-	@Test
-	public void test3() {
-		ModeloUsuario modeloUsuario = new ModeloUsuario();
-		Usuario usuario = modeloUsuario.read(null, null);
-		assertEquals(usuario, null);
+		boolean encontrado = modeloUsuario.read(nombreUsuario, password);
+		assertFalse(encontrado); // checkeamos que ha NO sido encontrado, caso contrario debe arrojar un error
 	}
 }

@@ -10,18 +10,21 @@ import javax.servlet.http.HttpSession;
 
 import bancoplatinum.beans.Persona;
 import bancoplatinum.beans.Usuario;
+import bancoplatinum.model.ModeloAgenda;
+import bancoplatinum.model.ModeloDuenio;
+import bancoplatinum.model.ModeloMascota;
 import bancoplatinum.model.ModeloUsuario;
 
 /**
  * Servlet implementation class Login
  */
-public class Login extends HttpServlet {
+public class RegistroAgenda extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public RegistroAgenda() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,22 +35,29 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// registro agenda
 
-		String nombreUsuario = request.getParameter("nombreUsuario");
-		String password = request.getParameter("password");
+		String nombreMascota = request.getParameter("nombreMascota");
+		String hora = request.getParameter("hora");
+		String fecha = request.getParameter("fecha"); 
+		
+		String idMascotaString = request.getParameter("idMascota");
+		int idMascota = Integer.parseInt(idMascotaString); 
+		
+		String rutDueño = request.getParameter("rutDueño");
 		
 		try {
-			ModeloUsuario modeloUsuario = new ModeloUsuario();
-			boolean encontrado = modeloUsuario.read(nombreUsuario, password);
+			ModeloAgenda modelo = new ModeloAgenda();
+			modelo.insert(nombreMascota, hora, fecha, idMascota, rutDueño);
 			
-			if (encontrado) {
-				response.sendRedirect("http://localhost:8080/BancoPlatinum/home.jsp");
-			} else {
-				response.sendRedirect("http://localhost:8080/BancoPlatinum/error.jsp");
-			}
+			// ok
+			response.sendRedirect("http://localhost:8080/BancoPlatinum/home.jsp");
 			
 		} catch (Exception e) {
+			// err
 			e.printStackTrace();
+			response.sendRedirect("http://localhost:8080/BancoPlatinum/error.jsp");
 		}
 	}
 
@@ -62,5 +72,3 @@ public class Login extends HttpServlet {
 	}
 
 }
-
-

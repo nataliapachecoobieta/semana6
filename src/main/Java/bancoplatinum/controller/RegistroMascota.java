@@ -10,18 +10,20 @@ import javax.servlet.http.HttpSession;
 
 import bancoplatinum.beans.Persona;
 import bancoplatinum.beans.Usuario;
+import bancoplatinum.model.ModeloDuenio;
+import bancoplatinum.model.ModeloMascota;
 import bancoplatinum.model.ModeloUsuario;
 
 /**
  * Servlet implementation class Login
  */
-public class Login extends HttpServlet {
+public class RegistroMascota extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public RegistroMascota() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,22 +34,25 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// registro mascota
 
-		String nombreUsuario = request.getParameter("nombreUsuario");
-		String password = request.getParameter("password");
+		String rutDueño = request.getParameter("rutDueño");
+		String tipoMascota = request.getParameter("tipoMascota");
+		String edad = request.getParameter("edad");
+		String nombreMascota = request.getParameter("nombreMascota");
 		
 		try {
-			ModeloUsuario modeloUsuario = new ModeloUsuario();
-			boolean encontrado = modeloUsuario.read(nombreUsuario, password);
+			ModeloMascota modelo = new ModeloMascota();
+			modelo.insert(rutDueño, tipoMascota, edad, nombreMascota);
 			
-			if (encontrado) {
-				response.sendRedirect("http://localhost:8080/BancoPlatinum/home.jsp");
-			} else {
-				response.sendRedirect("http://localhost:8080/BancoPlatinum/error.jsp");
-			}
+			// ok
+			response.sendRedirect("http://localhost:8080/BancoPlatinum/home.jsp");
 			
 		} catch (Exception e) {
+			// err
 			e.printStackTrace();
+			response.sendRedirect("http://localhost:8080/BancoPlatinum/error.jsp");
 		}
 	}
 
@@ -62,5 +67,3 @@ public class Login extends HttpServlet {
 	}
 
 }
-
-
